@@ -1,16 +1,6 @@
-package vn.udn.ute.quanlychitieu.adapter
-
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import vn.udn.ute.quanlychitieu.R
-import vn.udn.ute.quanlychitieu.helper.dinhDangTien
-import vn.udn.ute.quanlychitieu.model.ChiTieu
-
 class ChiTieuAdapter(
-    private val ds: List<ChiTieu>
+    private val ds: List<ChiTieu>,
+    private val onItemClick: (ChiTieu) -> Unit
 ) : RecyclerView.Adapter<ChiTieuAdapter.ChiTieuViewHolder>() {
 
     class ChiTieuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,6 +18,9 @@ class ChiTieuAdapter(
         val item = ds[position]
         holder.tvTenKhoan.text = item.tenKhoan
         holder.tvSoTien.text = item.soTien.dinhDangTien()
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int = ds.size

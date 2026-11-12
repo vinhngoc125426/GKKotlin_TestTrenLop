@@ -24,6 +24,9 @@
         <activity
             android:name=".view.ThemChiTieuActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.ChiTietChiTieuActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
