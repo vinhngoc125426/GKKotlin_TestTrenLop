@@ -33,6 +33,31 @@ class ThemChiTieuActivity : AppCompatActivity() {
         val soTienStr = edtSoTien.text.toString().trim()
         val ghiChu = edtGhiChu.text.toString().trim()
 
-        Toast.makeText(this, "Đã nhấn Lưu: $tenKhoan", Toast.LENGTH_SHORT).show()
+        if (!kiemTraDuLieu(tenKhoan, soTienStr, ghiChu)) {
+            return
+        }
+
+        // Dữ liệu hợp lệ
+        Toast.makeText(this, "Lưu thành công", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun kiemTraDuLieu(tenKhoan: String, soTienStr: String, ghiChu: String): Boolean {
+        if (tenKhoan.isEmpty()) {
+            Toast.makeText(this, "Tên khoản chi không được để trống", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        val soTien = soTienStr.toLongOrNull()
+        if (soTien == null || soTien < 1000 || soTien > 50000000) {
+            Toast.makeText(this, "Số tiền phải từ 1000 đến 50000000", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (ghiChu.length > 100) {
+            Toast.makeText(this, "Ghi chú tối đa 100 ký tự", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
     }
 }
